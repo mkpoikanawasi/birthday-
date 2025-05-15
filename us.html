@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Your Eyes Only</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background-color: #fff0f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #8b0000;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 90%;
+            text-align: center;
+            padding: 30px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(139, 0, 0, 0.1);
+            margin: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #8b0000;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            margin: 25px 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        
+        .message {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin: 25px 0;
+            padding: 0 10px;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        button {
+            background-color: #8b0000;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        button:hover {
+            background-color: #a52a2a;
+            transform: translateY(-2px);
+        }
+        
+        .heart {
+            color: #ff69b4;
+            font-size: 1.5rem;
+            animation: pulse 1.5s infinite;
+            display: inline-block;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .rose {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.7;
+            z-index: -1;
+        }
+        
+        footer {
+            margin-top: 30px;
+            font-style: italic;
+            color: #8b0000;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>For You <span class="heart">❤</span></h1>
+        
+        <div class="video-container">
+            <video id="romanticVideo" controls poster="https://images.unsplash.com/photo-1518199266791-5375a83190b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80">
+                <source src="vid 3.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        
+        <div class="message">
+            <p>This moment is just for us. Press play and let the magic begin.</p>
+            <p>I hope this video makes you smile as much as you make me smile every day.</p>
+        </div>
+        
+        <div class="controls">
+            <button onclick="playVideo()">
+                <span>▶</span> Play
+            </button>
+            <button onclick="pauseVideo()">
+                <span>⏸</span> Pause
+            </button>
+            <button onclick="restartVideo()">
+                <span>↻</span> Restart
+            </button>
+        </div>
+        
+        <footer>
+            Created with love, just for you
+        </footer>
+    </div>
+
+    <script>
+        const video = document.getElementById('romanticVideo');
+        
+        function playVideo() {
+            video.play();
+        }
+        
+        function pauseVideo() {
+            video.pause();
+        }
+        
+        function restartVideo() {
+            video.currentTime = 0;
+            video.play();
+        }
+        
+        // Create floating roses in the background
+        function createRoses() {
+            const container = document.querySelector('body');
+            const roseCount = 15;
+            
+            for (let i = 0; i < roseCount; i++) {
+                const rose = document.createElement('div');
+                rose.className = 'rose';
+                rose.innerHTML = '🌹';
+                rose.style.left = Math.random() * 100 + 'vw';
+                rose.style.top = Math.random() * 100 + 'vh';
+                rose.style.fontSize = (Math.random() * 1 + 1) + 'rem';
+                rose.style.animation = `float ${(Math.random() * 5 + 5)}s ease-in-out infinite`;
+                container.appendChild(rose);
+            }
+        }
+        
+        // Call the function when the page loads
+        window.onload = createRoses;
+    </script>
+</body>
+</html>
